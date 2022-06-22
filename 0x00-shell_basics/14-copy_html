@@ -1,5 +1,5 @@
-#!/bin/html
+#!/bin/bash
 cp /tmp/file_0.html
 cp /tmp/file_1.html
 cp /tmp/file_0.html /tmp/file_1.html
-cp /tmp/file_o.html /tmp/file_1.html /tmp/file_2.html
+cp /tmp/file_0.html /tmp/file_1.html /tmp/file_2.html
