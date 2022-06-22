@@ -1,2 +1,2 @@
 #!/bin/bash
-\n current working directory
+pwd
