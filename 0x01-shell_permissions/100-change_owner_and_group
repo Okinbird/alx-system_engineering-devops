@@ -1,2 +1,2 @@
 #!/bin/bash
-chown vincent:staff vincent staff
+chown vincent:staff --reference /
