@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R ugo+rwx
+chmod 755 $(find. -type d)
