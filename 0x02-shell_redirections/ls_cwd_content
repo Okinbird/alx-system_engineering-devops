@@ -1,0 +1,34 @@
+total 16
+drwxr-xr-x 1 okinamos okinamos  512 Jun 27 12:10 .
+drwxr-xr-x 1 okinamos okinamos  512 Jun 27 06:24 ..
+-rwxr-xr-x 1 okinamos okinamos   30 Jun 27 07:30 0-hello_world
+-rwxr-xr-x 1 okinamos okinamos   30 Jun 27 07:39 1-confused_smiley
+-rwxr-xr-x 1 okinamos okinamos   48 Jun 27 08:11 10-no_more_js
+-rwxr-xr-x 1 okinamos okinamos   64 Jun 27 10:21 100-empty_casks
+-rwxr-xr-x 1 okinamos okinamos  103 Jun 27 10:50 101-gifs
+-rwxr-xr-x 1 okinamos okinamos   40 Jun 27 10:25 102-acrostic
+-rwxr-xr-x 1 okinamos okinamos  116 Jun 27 10:42 103-the_biggest_fan
+-rwxr-xr-x 1 okinamos okinamos   44 Jun 27 08:13 11-directories
+-rwxr-xr-x 1 okinamos okinamos   25 Jun 27 08:19 12-newest_files
+-rwxr-xr-x 1 okinamos okinamos   27 Jun 27 08:20 13-unique
+-rwxr-xr-x 1 okinamos okinamos   36 Jun 27 08:24 14-findthatword
+-rwxr-xr-x 1 okinamos okinamos   41 Jun 27 08:25 15-countthatword
+-rwxr-xr-x 1 okinamos okinamos   39 Jun 27 08:27 16-whatsnext
+-rwxr-xr-x 1 okinamos okinamos   36 Jun 27 08:29 17-hidethisword
+-rwxr-xr-x 1 okinamos okinamos   59 Jun 27 09:38 18-letteronly
+-rwxr-xr-x 1 okinamos okinamos   25 Jun 27 08:33 19-AZ
+-rwxr-xr-x 1 okinamos okinamos   28 Jun 27 07:35 2-hellofile
+-rwxr-xr-x 1 okinamos okinamos   23 Jun 27 08:35 20-hiago
+-rwxr-xr-x 1 okinamos okinamos   16 Jun 27 08:36 21-reverse
+-rwxr-xr-x 1 okinamos okinamos   48 Jun 27 08:40 22-users_and_homes
+-rwxr-xr-x 1 okinamos okinamos   39 Jun 27 08:55 3-twofiles
+-rwxr-xr-x 1 okinamos okinamos   29 Jun 27 07:51 4-lastlines
+-rwxr-xr-x 1 okinamos okinamos   29 Jun 27 07:52 5-firstlines
+-rwxr-xr-x 1 okinamos okinamos   36 Jun 27 07:55 6-third_line
+-rwxr-xr-x 1 okinamos okinamos   80 Jun 27 09:08 7-file
+-rwxr-xr-x 1 okinamos okinamos   36 Jun 27 08:05 8-cwd_state
+-rwxr-xr-x 1 okinamos okinamos   35 Jun 27 09:14 9-duplicate_last_line
+-rw-r--r-- 1 okinamos okinamos 9883 Jun 27 11:06 README.md
+-rw-r--r-- 1 okinamos okinamos   12 Jun 27 12:03 \*\\'"Best School"\'\\*$\?\*\*\*\*\*:)
+-rw-r--r-- 1 okinamos okinamos  800 Jun 27 09:11 iacta
+-rw-r--r-- 1 okinamos okinamos    0 Jun 27 12:10 ls_cwd_content
