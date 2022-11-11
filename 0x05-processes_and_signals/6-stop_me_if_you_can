@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # A Bash scripts that stops 4-to_infinity_and_beyond process.
-# Using kill
+# Using kill or killall
 
-kill "$(pgrep -f 4-to_infinity_and_beyond)"
+pkill -f 4-to_infinity_and_beyond
