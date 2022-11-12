@@ -17,48 +17,26 @@
 #   If any other or no arguments are passed, displays
 #+  "Usage: manage_my_process {start|stop|restart}"
 
-FILE="/var/run/my_process.pid"
-
-function error()
-{
-    echo "Usage: manage_my_process {start|stop|restart}"
-}
-
-function start()
-{
-    (./manage_my_process) &
-    echo $$ > $FILE
-    echo "manage_py_process started"
-}
-
-function stop()
-{
-    pkill -f ./manage_my_process
-    sudo rm $FILE
-    echo "manage_my_process stopped"
-}
-
-function restart()
-{
-    pkill -f ./manage_my_process
-    rm $FILE
-    ./manage_my_process &
-    echo $$ > $FILE
-    echo "manage_my_process restarted"
-}
-
-if [ $# -ne 1 ];
+if [ "$1" == "start" ]
 then
-    error
+    ./manage_my_process &
+    echo $$ > /var/run/my_process.pid
+    echo "manage_my_process started"
+
+elif [ "$1" == "stop" ]
+then
+    kill "$(pgrep -f /manage_my_process)"
+    rm /var/run/my_process.pid
+    echo "manage_my_process stopped"
+
+elif [ "$1" == "restart" ]
+then
+    kill "$(pgrep -f /manage_my_process)"
+    rm /var/run/my_process.pid
+    ./manage_my_process &
+    echo $$ > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+
 else
-    case ${1} in
-	"start")
-	    start;;
-	"restart")
-	    restart;;
-	"stop")
-	    stop;;
-	*)
-	    error;;
-    esac
+    echo "Usage: manage_my_process {start|stop|restart}"
 fi
