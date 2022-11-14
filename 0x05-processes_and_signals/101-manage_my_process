@@ -37,6 +37,10 @@ then
     echo $$ > /var/run/my_process.pid
     echo "manage_my_process restarted"
 
+elif [ "$1" == "rm /var/run/my_process.pid" ]
+then
+    echo "Started\n"
+
 else
     echo "Usage: manage_my_process {start|stop|restart}"
     exit
