@@ -21,13 +21,12 @@ if [ "$1" == "start" ]
 then
     ./manage_my_process &
     echo $$ > sudo /var/run/my_process.pid
-    echo "Started"
     echo "manage_my_process started"
+    echo "Started"
 
 elif [ "$1" == "stop" ]
 then
     kill "$(pgrep -f /manage_my_process)"
-    echo "Stopped"
     rm /var/run/my_process.pid
     echo "manage_my_process stopped"
 
