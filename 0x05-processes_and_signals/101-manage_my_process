@@ -22,6 +22,7 @@ then
     ./manage_my_process &
     echo $$ > sudo /var/run/my_process.pid
     echo "manage_my_process started"
+    kill "$(pgrep -f /manage_my_process)"
     rm /var/run/my_process.pid
     echo "Started"
 
