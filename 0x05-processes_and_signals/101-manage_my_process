@@ -19,6 +19,7 @@
 
 if [ "$1" == "start" ]
 then
+    echo "Started"
     ./manage_my_process &
     echo $$ > sudo /var/run/my_process.pid
     echo "manage_my_process started"
