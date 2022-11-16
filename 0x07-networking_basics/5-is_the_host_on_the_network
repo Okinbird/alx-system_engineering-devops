@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# A Bash script that pings an IP address passed as an argument
+
+if ! (( $# ))
+then
+    printf 'Usage: %s {IP_ADDRESS}\n' "${0##*/}"
+    exit 2
+fi
+
+while (( $# ))
+do
+    ping -c 5 -- "$1"
+    shift
+done

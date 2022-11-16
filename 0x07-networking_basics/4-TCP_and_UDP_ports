@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# A Bash script that displays listening ports:
+#   Shows listening sockects
+#   Shows the PID and name of the program to which each socket belongs
+
+sudo netstat -l -p
