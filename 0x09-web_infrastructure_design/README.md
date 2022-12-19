@@ -89,7 +89,7 @@ Please, remember that everything must be written in English to further your tech
 
 
 
-3. Scale up
+#   3. Scale up
 
 Readme
 
