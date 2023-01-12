@@ -5,17 +5,15 @@
 #++    at the root with a curl GET request.
 
 sudo apt update
-sudo apt install -y nginx
+sudo apt installl
 
-mkdir /etc/nginx/html
-touch /etc/nginx/html/index.html
-echo "Hello World!" > /etc/nginx/html/index.html
-printf %s "server {
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html                                                                                           printf %s "server {
      listen      80 default_server;
      listen      [::]:80 default_server;
-     root        /etc/nginx/html;
+     root        /var/www/html;
      index       index.html index.htm;
 }
 " > /etc/nginx/sites-available/default
 
-service nginx restart
+sudo service nginx start
