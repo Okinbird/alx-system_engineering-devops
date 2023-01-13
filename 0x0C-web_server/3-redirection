@@ -13,7 +13,8 @@ then
     index index.html;
     server {
         listen 80;
-        location \ {
+        location /redirect_me {
+	    return 301 http://github.com/Okinbird;
         }
     }
 }
