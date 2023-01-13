@@ -2,26 +2,39 @@
 # Configures an Nginx server so that /redirect_me redirects to another page.
 # The redirection is configured as a "301 Moved Permanently"
 
-sudo apt update
+sudo apt update -y && \
 sudo apt install -y nginx
 
-sudo ufw allow 'Nginx HTTP'
-sudo chown -R "$USER":"$USER" /var/www/html/index.html
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /var/www/html;
-    index  index.html index.htm;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
+if [ "$#" -eq 0 ]
+then
+    echo -e \
+"http {
+    root /var/www/html;
+    index index.html;
+    server {
+        listen 80;
+        location \ {
+	    try_files \$uri \$uri/ =404;
+        }
+        
+        if (\$request_filename ~ redirect_me){
+            rewrite ^ https://github.com/Okinbird permanent;
+        }
     }
-    if (\$request_filename ~ redirect_me){
-        return 301 https://github.com/Okinbird;
-    }
-}" > /etc/nginx/sites-available/default
-
-sudo service nginx start
+}
+events {
+}" > /etc/nginx/nginx.conf
+    mkdir -p /var/www/html
+    echo "Hello World!" > \
+        /var/www/html/index.html
+    sudo service nginx start
+    if [ "$#" -ne 0 ]
+    then
+        "Problem starting nginx"
+        exit 1
+    fi
+else
+    echo "Could not install nginx"
+    exit 1
+fi
+exit 0
