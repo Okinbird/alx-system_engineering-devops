@@ -5,9 +5,6 @@
 sudo apt update -y && \
 sudo apt install -y nginx
 
-sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-
 if [ "$#" -eq 0 ]
 then
     echo -e \
@@ -17,15 +14,14 @@ then
     server {
         listen 80;
         location \ {
-	    try_files \$uri \$uri/ =404;
-        }
-        
-        if (\$request_filename ~ redirect_me){
-            rewrite ^ https://github.com/Okinbird permanent;
         }
     }
-}" > /etc/nginx/sites-available/default
-  
+}
+events {
+}" > /etc/nginx/nginx.conf
+    mkdir -p /var/www/html
+    echo "Hello World!" > \
+        /var/www/html/index.html
     sudo service nginx start
     if [ "$#" -ne 0 ]
     then
