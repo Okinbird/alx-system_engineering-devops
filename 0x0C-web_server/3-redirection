@@ -3,8 +3,8 @@
 # Configures an Nginx server so that /redirect_me redirects to another page.
 # The redirection is configured as a "301 Moved Permanently"
 
-# sudo apt update
-# sudo apt install -y nginx
+sudo apt update
+sudo apt install -y nginx
 
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
