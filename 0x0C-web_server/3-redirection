@@ -1,20 +1,43 @@
 #!/usr/bin/env bash
-# Configures an Nginx server so that /redirect_me redirects to another page.
-# The redirection is configured as a "301 Moved Permanently"
+# Installs, configures, and starts the server
+sudo apt update -y
+sudo apt install nginx -y
 
-sudo apt update
-sudo apt install -y nginx
+# server
+## Create default nginx folder
+sudo mkdir -p /var/www/html
 
+# Nginx should be listening on port 80
+## by default nginx listens on 80, so skip
+
+# When querying Nginx at its root / with a GET request (requesting a page) using curl, it must return a page that contains the string Hello World!
+## Create default index.html file
+sudo touch /var/www/html/index.html
+
+## Change ownership of file and directories to current user to permit edits
+sudo chown -R "$USER":"$USER" /var/www/html/index.html
+
+## Append hello world to file
+echo "Hello World!" > /var/www/html/index.html
+
+# Allow UFW firewall to receive xternal requests
 sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /var/www/html;
-    index  index.html index.htm;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-}" > /etc/nginx/sites-available/default
 
-sudo service nginx start
+SERVER_CONFIG="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	if (\$request_filename ~ redirect_me){
+		return 301 https://github.com/Okinbird;
+	}
+}"
+
+echo -e "$SERVER_CONFIG" > /etc/nginx/sites-enabled/default
+
+# You can’t use systemctl for restarting nginx
+sudo service nginx restart
