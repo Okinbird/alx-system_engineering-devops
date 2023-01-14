@@ -14,7 +14,8 @@ then
     server {
         listen 80;
         location /redirect_me {
-	    return 301 http://gitbub.com/Okinbird;
+	    return 301 http://github.com/Okinbird;
+        }
     }
 }
 events {
