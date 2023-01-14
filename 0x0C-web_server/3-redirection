@@ -10,10 +10,9 @@ then
     echo -e \
 "http {
     root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+    index index.html;
     server {
-        listen 80 default_server;
-	listen [::]:80 default_server
+        listen 80;
         location /redirect_me {
 	    return 301 http://gitbub.com/Okinbird;
     }
