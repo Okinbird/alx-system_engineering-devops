@@ -14,13 +14,8 @@ then
     server {
         listen 80 default_server;
 	listen [::]:80 default_server
-        location / {
-	    try_files \$uri \$uri/ =404;
-        }
-
-	if (\$request_filename ~ redirect_me){
-            rewrite ^ https://github.com/Okinbird permanent;
-        }
+        location /redirect_me {
+	    return 301 http://gitbub.com/Okinbird;
     }
 }
 events {
