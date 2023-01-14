@@ -10,11 +10,16 @@ then
     echo -e \
 "http {
     root /var/www/html;
-    index index.html;
+    index index.html index.htm index.nginx-debian.html;
     server {
-        listen 80;
-        location /redirect_me {
-	    return 301 http://github.com/Okinbird;
+        listen 80 default_server;
+	listen [::]:80 default_server
+        location / {
+	    try_files \$uri \$uri/ =404;
+        }
+
+	if (\$request_filename ~ redirect_me){
+            rewrite ^ https://github.com/Okinbird permanent;
         }
     }
 }
