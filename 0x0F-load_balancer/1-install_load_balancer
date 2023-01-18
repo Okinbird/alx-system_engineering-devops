@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Installs HAProxy version 1.8 with the following configurations:
+# Installs HAProxy with the following configurations:
 #+    Enables management via the init script.
 #+    Distributes requests using a round-robin algorithm.
 
 sudo apt install -y software-properties-common
-sudo add-repository -y ppa:vbernat/haproxy-1.8
+sudo add-repository -y ppa:vbernat/haproxy
 sudo apt update
-sudo apt install -y haproxy=1.8.\*
+sudo apt install -y haproxy
 
 echo "ENABLED=1" >> /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg{,.original}
