@@ -36,7 +36,7 @@ listen hbnb
     option httpclose
     option forwardfor
     server Okinbird-web-01 100.27.12.14:80 check
-    server 375-web-02 100.26.233.174:80 check
+    server Okinbird-web-02 100.26.233.174:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy start
