@@ -9,12 +9,12 @@
 sudo apt update
 sudo apt install -y nginx
 
-mkdir -p /var/www/html
-touch /var/www/html/index.html
+sudo mkdir -p /var/www/html
+sudo touch /var/www/html/index.html
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-touch /var/www/html/404.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
+sudo touch /var/www/html/404.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 printf %s "server {
     listen 80;
@@ -30,6 +30,6 @@ printf %s "server {
       root /var/www/html;
       internal;
     }
-}" > /etc/nginx/sites-available/default
+}" | sudo tee /etc/nginx/sites-available/default
 
 sudo service nginx start
