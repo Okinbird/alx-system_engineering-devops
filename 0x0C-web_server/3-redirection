@@ -10,20 +10,15 @@ then
     echo -e \
 "http {
     root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+    index index.html;
     server {
         listen 80;
-	listen [::]:80;
-	location / {
-		 try_files $uri $uri/ =404;
-	}
-        location /redirect_me {
-		 return 301 http://github.com/Okinbird;
+        location \ {
         }
     }
 }
 events {
-}" > /etc/nginx/sites-enabled/default
+}" > /etc/nginx/nginx.conf
     mkdir -p /var/www/html
     echo "Hello World!" > \
         /var/www/html/index.html
