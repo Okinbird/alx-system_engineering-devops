@@ -9,7 +9,7 @@ if [ "$#" -eq 0 ]
 then
     echo -e \
 "http {
-    root /var/www/100.27.12.14/html;
+    root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
     server {
         listen 80;
@@ -23,10 +23,10 @@ then
     }
 }
 events {
-}" > /etc/nginx/sites-enabled/100.27.12.14
-    mkdir -p /var/www/100.27.12.14/html
+}" > /etc/nginx/sites-enabled/default
+    mkdir -p /var/www/html
     echo "Hello World!" > \
-        /var/www/100.27.12.14/html/index.html
+        /var/www/html/index.html
     sudo service nginx start
     if [ "$#" -ne 0 ]
     then
