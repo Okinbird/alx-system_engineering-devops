@@ -9,20 +9,24 @@ if [ "$#" -eq 0 ]
 then
     echo -e \
 "http {
-    root /var/www/html;
-    index index.html;
+    root /var/www/okinbird.tech/html;
+    index index.html index.htm index.nginx-debian.html;
     server {
         listen 80;
+	listen [::]:80;
+	location / {
+		 try_files $uri $uri/ =404;
+	}
         location /redirect_me {
-	    return 301 http://github.com/Okinbird;
+		 return 301 http://github.com/Okinbird;
         }
     }
 }
 events {
-}" > /etc/nginx/nginx.conf
-    mkdir -p /var/www/html
+}" > /etc/nginx/sites-enabled/okinbird.tech
+    mkdir -p /var/www/okinbird.tech/html
     echo "Hello World!" > \
-        /var/www/html/index.html
+        /var/www/okinbird.tech/html/index.html
     sudo service nginx start
     if [ "$#" -ne 0 ]
     then
