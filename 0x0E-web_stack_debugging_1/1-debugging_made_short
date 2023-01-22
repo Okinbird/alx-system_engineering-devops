@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Configures an Nginx server to listen on port 80.
 
-FILE="/etc/nginx/sites-enabled/default"
-[ -L "$FILE" ] && service nginx restart || ln -sf /etc/nginx/sites-available/default "$FILE"
+sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
 sudo service nginx start
 sudo kill "$(pgrep 'nginx' | head -1)"
 
