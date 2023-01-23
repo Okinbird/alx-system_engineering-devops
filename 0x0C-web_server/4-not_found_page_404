@@ -9,25 +9,25 @@
 sudo apt update
 sudo apt install -y nginx
 
-sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-
+sudo mkdir /etc/nginx/html
+sudo touch /etc/nginx/html/index.html
+echo "Hello World!" | sudo tee /etc/nginx/html/index.html
+sudo touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" | sudo tee /etc/nginx/html/404.html
 printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /var/www/html;
-    index  index.html index.htm;
+       listen 80;
+       listen [::]:80 default_server;
+       root   /etc/nginx/html;
+       index  index.html index.htm;
+       location /redirect_me {
+       		return 301 http://github.com/Okinbird;
+       }
 
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+       error_page 404 /404.html;
+       location /404 {
+       		root /etc/nginx/html;
+      		internal;
     }
+}" | sudo tee /etc/nginx/sites-available/default
 
-    error_page 404 /404.html;
-    location /404 {
-      root /var/www/html;
-      internal;
-    }
-}" > /etc/nginx/sites-available/default
-
-sudo service nginx start
+sudo service nginx restart
