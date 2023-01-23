@@ -5,31 +5,17 @@
 sudo apt update -y && \
 sudo apt install -y nginx
 
-if [ "$#" -eq 0 ]
-then
-    echo -e \
-"http {
-    root /var/www/html;
-    index index.html;
-    server {
-        listen 80;
-        location \ {
-        }
-    }
-}
-events {
-}" > /etc/nginx/nginx.conf
-    mkdir -p /var/www/html
-    echo "Hello World!" > \
-        /var/www/html/index.html
-    sudo service nginx start
-    if [ "$#" -ne 0 ]
-    then
-        "Problem starting nginx"
-        exit 1
-    fi
-else
-    echo "Could not install nginx"
-    exit 1
-fi
-exit 0
+sudo mkdir /etc/nginx/html
+sudo touch /etc/nginx/html/index.html
+echo "Hello World!" | sudo tee /etc/nginx/html/index.html
+printf %s "server {
+       listen 80;
+       listen [::]:80 default_server;
+       root   /etc/nginx/html;
+       index  index.html index.htm;
+       location /redirect_me {
+       		return 301 http://github.com/Okinbird;
+       }
+}" | sudo tee /etc/nginx/sites-available/default
+
+sudo service nginx restart
