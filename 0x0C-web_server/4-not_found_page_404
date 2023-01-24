@@ -9,24 +9,23 @@
 sudo apt update
 sudo apt install -y nginx
 
-sudo mkdir /etc/nginx/html
-sudo touch /etc/nginx/html/index.html
-echo "Hello World!" | sudo tee /etc/nginx/html/index.html
-sudo touch /etc/nginx/html/404.html
-echo "Ceci n'est pas une page" | sudo tee /etc/nginx/html/404.html
+sudo mkdir -p /var/www/html
+sudo touch /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo touch /var/www/html/404.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 printf %s "server {
        listen 80;
        listen [::]:80 default_server;
-       root   /etc/nginx/html;
+       root   /var/www/html;
        index  index.html index.htm;
        location /redirect_me {
        		return 301 http://github.com/Okinbird;
        }
-
        error_page 404 /404.html;
        location /404 {
-       		root /etc/nginx/html;
-      		internal;
+       root /var/www/html;
+       internal;
     }
 }" | sudo tee /etc/nginx/sites-available/default
 
