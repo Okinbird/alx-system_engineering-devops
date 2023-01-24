@@ -19,17 +19,20 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
     root   /var/www/html;
-    index  index.html index.htm;
+    index  index.html index.htm index.nginx-debian.html;
+    location / {
+             add_header X-Served-By $HOSTNAME;
+             try_files $uri $uri/ =404;
+    }
     location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+             return 301 https://github.com/Okinbird;
     }
     error_page 404 /404.html;
     location /404 {
-      root /var/www/html;
-      internal;
-    }
+    root /var/www/html;
+    internal;
+  }
 }" | sudo tee /etc/nginx/sites-available/default
 
-sudo service nginx start
+sudo service nginx restart
