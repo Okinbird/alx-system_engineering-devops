@@ -43,7 +43,7 @@ frontend www-http
         default_backend web-backend
 
 frontend www-https
-        bind *:443 ssl crt /etc/haproxy/ssl/www.okinbird.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/www.okinbird.tech.pem
         reqadd X-Forwarded-Proto:\ https
         default_backend web-backend
 
