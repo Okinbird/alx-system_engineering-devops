@@ -35,7 +35,7 @@ listen Okinbird
        balance roundrobin
        option httpclose
        option forwardfor
-       server Okinbird-web-01 100.27.12.14:80 check
+       server Okinbird-web-01 100.26.172.143:80 check
        server Okinbird-web-02 100.26.233.174:80 check
 " | sudo tee /etc/haproxy/haproxy.cfg
 
