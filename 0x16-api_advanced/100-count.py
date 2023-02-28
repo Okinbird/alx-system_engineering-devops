@@ -49,10 +49,11 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
                     instances[word] += times
 
     if after is None:
-        if len(instances) == 0:
-            print("")
-            return
-        instances = sorted(instances.items(), key=lambda kv: (-kv[1], kv[0]))
-        [print("{}: {}".format(k, v)) for k, v in instances]
+        word_list = [[key, value] for key, value in instances.items()]
+        word_list = sorted(word_list, key=lambda kv: (-kv[1], kv[0]))
+        for w in word_list:
+            if w[1]:
+                print("{}: {}".format(w[0].lower(), w[1]))
+        return None
     else:
         count_words(subreddit, word_list, instances, after, count)
