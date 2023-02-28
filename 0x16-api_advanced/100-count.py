@@ -32,6 +32,8 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
     except Exception:
         print("")
         return
+    except ValueError:
+        return None
 
     results = results.get("data")
     after = results.get("after")
