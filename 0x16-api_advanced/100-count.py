@@ -1,43 +1,40 @@
 #!/usr/bin/python3
-""" simple comment """
-from operator import itemgetter
+"""GET to api"""
 import requests
 
 
-def count_words(subreddit, word_list, hot_list=[], init=0, after="null"):
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    agt = {"User-Agent": "linux:1:v2.1 (by /u/heimer_r)"}
-    payload = {"limit": "100", "after": after}
-    hot = requests.get(url, headers=agt, params=payload, allow_redirects=False)
-    if hot.status_code == 200:
-        posts = hot.json().get("data").get("children")
-        hot_list += [post.get("data").get("title") for post in posts]
-        after = hot.json().get("data").get("after")
-        if after is not None:
-            count_words(subreddit, word_list, hot_list, 1, after)
-        if init == 0:
-            hot_str = " ".join(hot_list)
-            hot_words = hot_str.split(" ")
-            word_list_low = sorted(word_list)
-            rt = []
-            for word in word_list_low:
-                num = len(
-                    list(
-                        filter(
-                            lambda hot_w: hot_w.lower() == word.lower(),
-                            hot_words)))
-                if num != 0:
-                    rt.append([word, num])
-            if len(rt) != 0:
-                i = 0
-                while i < len(rt) - 1:
-                    if rt[i + 1][0] is not None and rt[i][0] == rt[i + 1][0]:
-                        rt[i][1] += rt[i + 1][1]
-                        rt.pop(i + 1)
-                        rt.append([None, None])
-                        i -= 1
-                    i += 1
-                r = list(filter(lambda x: x != [None, None], rt))
-                r_sorted = sorted(r, key=lambda x: (x[1]), reverse=True)
-                for i in r_sorted:
-                    print(*i, sep=": ")
+def recurse(subreddit, word_list, after="", dic={}):
+    """recursive function"""
+    base_url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    h = {'User-Agent': 'Reddit API test'}
+    params = {'limit': 200, 'after': after}
+    r = requests.get(base_url, headers=h, allow_redirects=False, params=params)
+    if r.status_code != 200:
+        return None
+    d = r.json()
+    if after is None:
+        return dic
+    l = d.get('data', {}).get('children')
+    for i in l:
+        title = i.get('data', {}).get('title').lower().split()
+        for j in word_list:
+            for t in title:
+                if j == t:
+                    if j not in dic:
+                        dic[j] = 1
+                    else:
+                        dic[j] += 1
+    p = d.get('data', {}).get('after')
+    return recurse(subreddit, word_list, p, dic)
+
+
+def count_words(subreddit, word_list):
+    """Cound # of keywords"""
+    for i, e in enumerate(word_list):
+        word_list[i] = e.lower()
+    d = recurse(subreddit, word_list)
+    if d:
+        for key, value in sorted(d.items(), key=lambda x: (-x[1], x[0])):
+            print("{}: {}".format(key, value))
+    elif d is None:
+        print()
