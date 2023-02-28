@@ -1,40 +1,61 @@
 #!/usr/bin/python3
-"""GET to api"""
-import requests
+""" Count it! """
+from requests import get
+
+REDDIT = "https://www.reddit.com/"
+HEADERS = {'user-agent': 'my-app/0.0.1'}
 
 
-def recurse(subreddit, word_list, after="", dic={}):
-    """recursive function"""
-    base_url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    h = {'User-Agent': 'Reddit API test'}
-    params = {'limit': 200, 'after': after}
-    r = requests.get(base_url, headers=h, allow_redirects=False, params=params)
+def count_words(subreddit, word_list, after="", word_dic={}):
+    """
+    Returns a list containing the titles of all hot articles for a
+    given subreddit. If no results are found for the given subreddit,
+    the function should return None.
+    """
+    if not word_dic:
+        for word in word_list:
+            word_dic[word] = 0
+
+    if after is None:
+        word_list = [[key, value] for key, value in word_dic.items()]
+        word_list = sorted(word_list, key=lambda x: (-x[1], x[0]))
+        for w in word_list:
+            if w[1]:
+                print("{}: {}".format(w[0].lower(), w[1]))
+        return None
+
+    url = REDDIT + "r/{}/hot/.json".format(subreddit)
+
+    params = {
+        'limit': 100,
+        'after': after
+    }
+
+    r = get(url, headers=HEADERS, params=params, allow_redirects=False)
+
     if r.status_code != 200:
         return None
-    d = r.json()
-    if after is None:
-        return dic
-    l = d.get('data', {}).get('children')
-    for i in l:
-        title = i.get('data', {}).get('title').lower().split()
-        for j in word_list:
-            for t in title:
-                if j == t:
-                    if j not in dic:
-                        dic[j] = 1
-                    else:
-                        dic[j] += 1
-    p = d.get('data', {}).get('after')
-    return recurse(subreddit, word_list, p, dic)
 
+    try:
+        js = r.json()
 
-def count_words(subreddit, word_list):
-    """Cound # of keywords"""
-    for i, e in enumerate(word_list):
-        word_list[i] = e.lower()
-    d = recurse(subreddit, word_list)
-    if d:
-        for key, value in sorted(d.items(), key=lambda x: (-x[1], x[0])):
-            print("{}: {}".format(key, value))
-    elif d is None:
-        print()
+    except ValueError:
+        return None
+
+    try:
+
+        data = js.get("data")
+        after = data.get("after")
+        children = data.get("children")
+        for child in children:
+            post = child.get("data")
+            title = post.get("title")
+            lower = [s.lower() for s in title.split(' ')]
+
+            for w in word_list:
+                word_dic[w] += lower.count(w.lower())
+
+    except:
+        return None
+
+    count_words(subreddit, word_list, after, word_dic)
