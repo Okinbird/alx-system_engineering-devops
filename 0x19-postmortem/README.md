@@ -1,6 +1,6 @@
 ##  0x19. Postmortem
 
-[![Postmortem](https://github.com/Okinbird/alx-system_engineering-devops/blob/master/0x19-postmortem/postmortem.gif)
+[![Postmortem]](https://github.com/Okinbird/alx-system_engineering-devops/blob/master/0x19-postmortem/postmortem.gif)
 
 As we described in a previous project 0x05. AirBnB clone - RESTful API, earlier this week we experienced an outage in our API infrastructure. Today we’re providing an incident report that details the nature of the outage and our response.
 
