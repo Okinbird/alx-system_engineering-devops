@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 # No service interruption
-# pkill -HUP gunicorn
-PID=$(pgrep gunicorn | head -n 1)
-pkill -HUP "$PID"
+kill -HUP gunicorn
