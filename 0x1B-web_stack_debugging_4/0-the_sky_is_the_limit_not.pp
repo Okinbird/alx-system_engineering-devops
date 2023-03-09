@@ -8,7 +8,6 @@ service { 'Nginx':
   ensure => running,
   enable => true,
 }
-}
 -> exec { 'restart service':
   command => '/usr/sbin/service nginx restart',
 }
