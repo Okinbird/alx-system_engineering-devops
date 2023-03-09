@@ -2,4 +2,4 @@
 # No service interruption
 # pkill -HUP gunicorn
 PID=$(pgrep gunicorn | head -n 1)
-kill -HUP "$PID"
+pkill -HUP "$PID"
