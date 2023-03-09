@@ -8,6 +8,6 @@ exec { 'increase soft limit':
   path    => '/usr/bin:/usr/sbin:/bin',
   command => 'sed -i "s/holberton soft nofile 4/holberton soft nofile 4000/" /etc/security/limits.conf',
 }
--> exwc { 'refresh conf':
+-> exec { 'refresh conf':
   command => '/sbin/sysdctl -p',
 }
